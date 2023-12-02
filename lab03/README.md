@@ -1,4 +1,5 @@
 # Лабораторная работа №3
+
 ```
 #include <stdio.h>
 #include <stdlib.h>
