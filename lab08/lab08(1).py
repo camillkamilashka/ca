@@ -1,3 +1,7 @@
+import os
+import sys
+
+
 def limit_hp(min_hp, max_hp):
     def decorator(func):
         def wrapper(*args, **kwargs):
