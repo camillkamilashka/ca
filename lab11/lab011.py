@@ -2,11 +2,16 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import string
+import os
 
 class PasswordManager:
     def __init__(self, master):
         self.master = master
         self.master.title("Password Manager")
+        
+        self.folder_path = os.getcwd() + "/passwords"
+        if not os.path.exists(self.folder_path):
+            os.makedirs(self.folder_path)
 
         self.login_label = Label(self.master, text="Login: ")
         self.login_label.pack()
@@ -45,7 +50,10 @@ class PasswordManager:
         password = self.password_entry.get()
 
         if login and platform and password:
-            # Save the login, platform, and password to a file or database
+            filename = f"{self.folder_path}/{platform}.txt"
+            with open(filename, "w") as file:
+                file.write(f"Login: {login}\n")
+                file.write(f"Password: {password}\n")
             messagebox.showinfo("Success", f"Password for {platform} saved successfully!")
         else:
             messagebox.showerror("Error", "Please enter a login, platform, and password.")
@@ -54,4 +62,3 @@ if __name__ == "__main__":
     root = Tk()
     app = PasswordManager(root)
     root.mainloop()
-    
